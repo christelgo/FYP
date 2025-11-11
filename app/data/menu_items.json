@@ -1,0 +1,139 @@
+
+{
+    "defaults":{
+        "delivery_zones":{
+            "West":["Boon Lay", "Bukit Panjang","Bukit Timah", "Choa Chu Kang","Holland","Jurong","Pasir Panjang", "Sembawang", "Tuas","Woodlands","Yishun"],
+            "East":["Alexandra", "Ang Mo Kio", "Bishan","Bugis", "Central Business District(CBD)","Hougang", "Newton","Novena","Orchard", "Potong Pasir", "Queenstown", "Redhill", "Sentosa", "Serangoon", "Suntec", "Tanglin", "Tiong Bahru", "Toa Payoh", "Telok Blangah", "Yio Chu Kang"],
+            "Central":["Aljunied","Bedok","Changi","Eunos","Lavender","Kallang","Pasir Ris","Paya Lebar", "Punggol","Sengkang", "Tampines"]
+        },
+        "pickup_zones":{
+            "West":["Woodlands"],"East": ["East Coast"],"Cemtral":["River Valley"]
+            
+        }
+    },
+    "categories": {
+        "ala_carte":{
+            "chicken": [
+             {"name": "Chicken Porridge"},
+             {"name":"Thai Style Crystal Chicken Feet"},
+             {"name": "Chicken Viscera"},
+             {"name": "Prawn Paste Chicken"}, 
+             {"name": "Ginger & Spring Onion Diced Chicken"},
+             {"name": "Chicken with Basil, Chilli & Rice Wine"},
+             {"name": "Dried Chilli Diced Chicken (Kung Pao Chicken)"}
+            ],
+        "pork": [
+            {"name": "Sweet & Sour pork"},
+            {"name": "Ginger & Spring Onion Sliced Pork"},
+            {"name": "Bitter Gourd Pork Ribs"},
+            {"name": "Butter Pork Ribs"},
+            {"name": "Imperial Pork Ribs"},
+            {"name": "Salted Egg Pork Ribs"}
+        ],
+        "tofu_omelette":[
+            {"name":"Thai Style Tofu"},
+            {"name":"Claypot Tofu"},
+            {"name":"Fragrant Tofu with seasonal Vegetables"},
+            {"name":"Hot Plate Tofu"},
+            {"name":"Fu Young Omelette"},
+            {"name":"Onion Omelette"},
+            {"name":"Bitter Gourd Omelette"},
+            {"name":"Minced Meat Omelette"},
+            {"name":"Shrimp Omelette"}
+        ],
+        "Fish":[
+            {"name":"Red Grouper"},
+            {"name":"Fish Head Steamboat"},
+            {"name":"BBQ Stingray"},
+            {"name":"Claypot Fish Head"},
+            {"name":"Sweet & Sour / Sambal / BBQ Seabass"},
+            {"name":"Stir-Fried Fish Head with Bitter Gourd"},
+            {"name":"Crispy Seabass with Preserved Radish"},
+            {"name":"Black Pepper Sliced Fish"},
+            {"name":"Dried Chilli Sliced Fish"},
+            {"name":"Ginger & Spring Onion Sliced Fish"},
+            {"name":"Sweet & Sour Sliced Fish"}
+        ],
+        "Seafood":[
+            {"name":"Salted Egg Crab"},
+            {"name":"Chilli Crab"},
+            {"name":"Crab with Bee Hoon"},
+            {"name":"Deep-Fried Seafood Stuffed You Tiao"},
+            {"name":"Deep-Fried Baby Squid with Sweet & Spicy Sauce"},
+            {"name":"Braised Sea Cucumber with Mushroom"},
+            {"name":"Deep-Fried Prawns with Salad Sauce"},
+            {"name":"Cereal Prawn "},
+            {"name":"Deep-Fried Prawns with Butter"},
+            {"name":"Pan-Fried Prawns with Sambal"},
+            {"name":"Salted Egg / Black Pepper / Sweet & Sour Prawns"},
+            {"name":"Prawn Roll (Ngoh Hiang)"},
+            {"name":"Deep-Fried Sotong"},
+            {"name":"Cereal Sotong"},
+            {"name":"Sambal Sotong"},
+            {"name": "Salted Egg Sotong"}
+        ],
+        "Vegetables":[
+            {"name":"Sambal Kang Kong"},
+            {"name":"Kang Kong with Cuttlefish"},
+            {"name":"Sambal Asparagus"},
+            {"name":"Stir-Fried Chinese Spinach with Garlic"},
+            {"name":"Baby Kailan with Garlic / Oyster Sauce / Sambal"},
+            {"name":"Bean Sprouts with Salted Fish"},
+            {"name":"Eggplant with Fish Floss"},
+            {"name":"Stir-Fried Tiny Chinese Cabbage with Garlic"},
+            {"name":"Tiny Chinese Cabbage Poached in Broth"},
+            {"name":"Stir-Fried / Bean Paste Bitter Gourd"},
+            {"name":"Bitter Gourd Sliced Fish with Bean Paste"},
+            {"name":"Braised Mixed Vegetables (Luo Han Zhai)"},
+            {"name":"Yam Ring with Prawns & Assorted Vegetables"},
+            {"name":"Stir-Fried Four Season Beans with Preserved Radish "},
+            {"name":"Bak Choy / Hong Kong Kailan with Oyster Sauce"},
+            {"name":"Bean Sprouts / Lettuce with Cuttlefish"},
+            {"name":"Stir-Fried Broccoli"},
+            {"name":"Broccoli with Scallops"},
+            {"name":"Kailan / Baby Kailan / Broccoli with Sliced Fish"},
+            {"name":"Kailan / Baby Kailan / Broccoli with Prawn Fritters"}
+        ],
+        "Soup,Rice,Noodles":[
+            {"name":"Seafood Fried Rice"},
+            {"name":"Rice with Silky Gravy (Mui Fan)"},
+            {"name":"Sambal Fried Rice"},
+            {"name":"Salted Fish Fried Rice"},
+            {"name":"Fish Maw Soup"},
+            {"name":"Fish Maw Potage"},
+            {"name":"Salted Vegetables Tofu Soup"},
+            {"name":"Bitter Gourd Soup"},
+            {"name":"San Lao Hor Fun"},
+            {"name":"Kway Teow Soup"},
+            {"name":"Hor Fun with Egg Gravy"},
+            {"name":"Mee Goreng"},
+            {"name":"Hokkien Mee"},
+            {"name":"Sin Chew Fried Bee Hoon"},
+            {"name":"Dry Hor Fun"}
+        ], 
+        "Desserts, Drinks":[
+            {"name":"Shaved Ice Dessert"},
+            {"name":"Mango Pudding"},
+            {"name":"Almond Longan Beancurd"},
+            {"name":"Chendol"},
+            {"name":"Bo Bo Cha Cha"},
+            {"name":"Burbor Hitam (warm)"},
+            {"name":"Mango Pudding"},
+            {"name":"Peanut Ice Kachung"},
+            {"name":"Red Bean Lotuc Seed"},
+            {"name":"Chinese Tea (Hot/Cold)"},
+            {"name":"Homemade Barley"},
+            {"name":"Lime Juice"},
+            {"name":"Lemongrass Drink"},
+            {"name":"Canned Drinks"},
+            {"name":"Tiger Beer"},
+            {"name":"Heineken"},
+            {"name":"Mineral Water"}
+
+        ]
+        }
+
+        
+  
+
+}}
