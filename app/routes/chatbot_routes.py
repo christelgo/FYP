@@ -1,19 +1,14 @@
 from flask import Blueprint, request, jsonify
+from app.services.bot_engine import generate_bot_reply
 
 chatbot_bp = Blueprint('chatbot', __name__)
 
-@chatbot_bp.route('/chat', methods=["GET","POST"])
+@chatbot_bp.route("/chat", methods = ["POST"])
 def chat():
-    if request.method == "GET":
-        return jsonify({"message": "CHATBOT API IS RUNNING"})
-    
     data = request.get_json()
-    user_message = data.get("message", "").lower()
 
-    if "hello" in user_message or "hi" in user_message:
-        reply = "Hello"
-    else:
-        reply = "Apologies could you repeat that"
+    user_message = data.get("message","")
 
-    return jsonify({"reply":reply}), 200
-##chatbot api runs
+    reply = generate_bot_reply(user_message)
+    
+    return jsonify({"reply":reply})
