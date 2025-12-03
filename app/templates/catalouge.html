@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0px 20px 20px 20px;
+            background-color: #EFEBDF;
+        }
+        h1{
+            font-size: 60px;
+            padding-left: 0;
+            
+            margin: auto ;
+            padding-left: 10px;
+        }
+        .ala_carte ol{
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 20px;
+            scroll-padding-right: 40px;
+            /* border: 1px solid purple; */
+            
+            padding-left: 40px;
+            padding-right: 40px;
+            scrollbar-width: 0.1px;
+        
+        }
+
+        .ala_carte li{
+            border: 1px solid brown;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            width: 320px;
+            height: 300px;
+            align-items: center;
+            background-color: #928787;
+        }
+
+        .ala_carte ol::-webkit-scrollbar{
+            height:  8px;
+            /* border: 1px solid red; */
+        }
+        .ala_carte ol::-webkit-scrollbar-track{
+            /* background: hsla(106, 30%, 43%, 0.5) ; */
+            margin-left: 40px;
+            margin-right: 40px;
+            border-radius: 20px;
+        }
+        .ala_carte ol::-webkit-scrollbar-thumb{
+            background: hsl(0, 0.7%, 72.7%) ; 
+            border-radius: 20px;
+        }
+        .omelette{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/omelette-.jpg");
+            background-size: cover;
+            background-position: center;
+            font-weight: bold;
+            color: white;
+            font-size: 40px;
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .bento_sets ol{
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 20px;
+            scroll-padding-right: 40px;
+                /* border: 1px solid purple; */
+            margin-top: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
+            scrollbar-width: 0.1px;
+            
+        }
+
+        .bento_sets li{
+            border: 1px solid brown;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            width: 320px;
+            height: 300px;
+            align-items: center;
+            background-color: #928787;
+        }
+
+        .bento_sets ol::-webkit-scrollbar{
+            height:  8px;
+            /* border: 1px solid red; */
+        }
+        .bento_sets ol::-webkit-scrollbar-track{
+            /* background: hsla(106, 30%, 43%, 0.5) ; */
+            margin-left: 40px;
+            margin-right: 40px;
+            border-radius: 20px;
+            }
+        .bento_sets ol::-webkit-scrollbar-thumb{
+            background: hsl(0, 0.7%, 72.7%) ; 
+            border-radius: 20px;
+            }
+
+        button{
+            background-color:#7f8985 ;
+            height: 60px;
+            width: 100px;
+            margin: 50px;
+            font-size: 20px;
+            padding-bottom: 0px;
+            box-shadow: none !important;
+            border-radius: 10px;
+        }
+        
+    
+    </style>
+    
+</head>
+<body>
+    <div class="ala_carte">
+        <h1>Ala Carte</h1>
+        <ol class="ala_carte_categories"> 
+            <!-- this is ala carte -->
+            <li class="chef">Chef's Recommendations</li>
+            <li class="chicken">Chicken</li>
+            <li class="pork">Pork</li>
+            <li class="seafood">Seafood</li>
+            <li class="omelette">Omelette</li>
+            <li class="fish">Fish</li>
+            <li class="vegetables">Vegetables</li>
+            <li class="staples">Rice</li>
+            <li class="drinks">Drinks and Desserts</li>
+        </ol>
+   </div>
+   <div class="bento_sets">
+        <h1>Bento Sets</h1>
+        <ol class="bento_set_catagories">
+            <!-- this is bentos -->
+            <li><a href="bento_order.html">Speciality-Kampung Chicken</a></li>
+            <li>Fish</li>
+            <li>Regular Chicken</li>
+            <li>Pork</li>
+            <li>Vegetarian</li>
+            <li>Others</li>
+        </ol>
+       </div>
+    <button><a href="Personal_info.html">back</a></button>
+    <script>
+
+    </script>
+</body>
+</html>
