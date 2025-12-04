@@ -1,4 +1,3 @@
-
 {
     "defaults":{
         "delivery_zones":{
@@ -7,129 +6,214 @@
             "Central":["Aljunied","Bedok","Changi","Eunos","Lavender","Kallang","Pasir Ris","Paya Lebar", "Punggol","Sengkang", "Tampines"]
         },
         "pickup_zones":{
-            "West":["Woodlands"],"East": ["East Coast"],"Cemtral":["River Valley"]
+            "West":["Woodlands"],"East": ["East Coast"],"Central":["River Valley"]
             
         }
     },
+
     "categories": {
         "ala_carte":{
             "chicken": [
-             {"name": "Chicken Porridge"},
-             {"name":"Thai Style Crystal Chicken Feet"},
-             {"name": "Chicken Viscera"},
-             {"name": "Prawn Paste Chicken"}, 
-             {"name": "Ginger & Spring Onion Diced Chicken"},
-             {"name": "Chicken with Basil, Chilli & Rice Wine"},
-             {"name": "Dried Chilli Diced Chicken (Kung Pao Chicken)"}
+                {"name": "Chicken Porridge","price":"$8.20"},
+                {"name":"Thai Style Crystal Chicken Feet","price":"$12.60"},
+                {"name": "Chicken Viscera","price":"9.90"},
+                {"name": "Prawn Paste Chicken","price":"13.90"}, 
+                {"name": "Ginger & Spring Onion Diced Chicken","price":"16.30"},
+                {"name": "Chicken with Basil, Chilli & Rice Wine","price":"15.90"},
+                {"name": "Dried Chilli Diced Chicken (Kung Pao Chicken)","price":"15.60"}
             ],
-        "pork": [
-            {"name": "Sweet & Sour pork"},
-            {"name": "Ginger & Spring Onion Sliced Pork"},
-            {"name": "Bitter Gourd Pork Ribs"},
-            {"name": "Butter Pork Ribs"},
-            {"name": "Imperial Pork Ribs"},
-            {"name": "Salted Egg Pork Ribs"}
-        ],
-        "tofu_omelette":[
-            {"name":"Thai Style Tofu"},
-            {"name":"Claypot Tofu"},
-            {"name":"Fragrant Tofu with seasonal Vegetables"},
-            {"name":"Hot Plate Tofu"},
-            {"name":"Fu Young Omelette"},
-            {"name":"Onion Omelette"},
-            {"name":"Bitter Gourd Omelette"},
-            {"name":"Minced Meat Omelette"},
-            {"name":"Shrimp Omelette"}
-        ],
-        "Fish":[
-            {"name":"Red Grouper"},
-            {"name":"Fish Head Steamboat"},
-            {"name":"BBQ Stingray"},
-            {"name":"Claypot Fish Head"},
-            {"name":"Sweet & Sour / Sambal / BBQ Seabass"},
-            {"name":"Stir-Fried Fish Head with Bitter Gourd"},
-            {"name":"Crispy Seabass with Preserved Radish"},
-            {"name":"Black Pepper Sliced Fish"},
-            {"name":"Dried Chilli Sliced Fish"},
-            {"name":"Ginger & Spring Onion Sliced Fish"},
-            {"name":"Sweet & Sour Sliced Fish"}
-        ],
-        "Seafood":[
-            {"name":"Salted Egg Crab"},
-            {"name":"Chilli Crab"},
-            {"name":"Crab with Bee Hoon"},
-            {"name":"Deep-Fried Seafood Stuffed You Tiao"},
-            {"name":"Deep-Fried Baby Squid with Sweet & Spicy Sauce"},
-            {"name":"Braised Sea Cucumber with Mushroom"},
-            {"name":"Deep-Fried Prawns with Salad Sauce"},
-            {"name":"Cereal Prawn "},
-            {"name":"Deep-Fried Prawns with Butter"},
-            {"name":"Pan-Fried Prawns with Sambal"},
-            {"name":"Salted Egg / Black Pepper / Sweet & Sour Prawns"},
-            {"name":"Prawn Roll (Ngoh Hiang)"},
-            {"name":"Deep-Fried Sotong"},
-            {"name":"Cereal Sotong"},
-            {"name":"Sambal Sotong"},
-            {"name": "Salted Egg Sotong"}
-        ],
-        "Vegetables":[
-            {"name":"Sambal Kang Kong"},
-            {"name":"Kang Kong with Cuttlefish"},
-            {"name":"Sambal Asparagus"},
-            {"name":"Stir-Fried Chinese Spinach with Garlic"},
-            {"name":"Baby Kailan with Garlic / Oyster Sauce / Sambal"},
-            {"name":"Bean Sprouts with Salted Fish"},
-            {"name":"Eggplant with Fish Floss"},
-            {"name":"Stir-Fried Tiny Chinese Cabbage with Garlic"},
-            {"name":"Tiny Chinese Cabbage Poached in Broth"},
-            {"name":"Stir-Fried / Bean Paste Bitter Gourd"},
-            {"name":"Bitter Gourd Sliced Fish with Bean Paste"},
-            {"name":"Braised Mixed Vegetables (Luo Han Zhai)"},
-            {"name":"Yam Ring with Prawns & Assorted Vegetables"},
-            {"name":"Stir-Fried Four Season Beans with Preserved Radish "},
-            {"name":"Bak Choy / Hong Kong Kailan with Oyster Sauce"},
-            {"name":"Bean Sprouts / Lettuce with Cuttlefish"},
-            {"name":"Stir-Fried Broccoli"},
-            {"name":"Broccoli with Scallops"},
-            {"name":"Kailan / Baby Kailan / Broccoli with Sliced Fish"},
-            {"name":"Kailan / Baby Kailan / Broccoli with Prawn Fritters"}
-        ],
-        "Soup,Rice,Noodles":[
-            {"name":"Seafood Fried Rice"},
-            {"name":"Rice with Silky Gravy (Mui Fan)"},
-            {"name":"Sambal Fried Rice"},
-            {"name":"Salted Fish Fried Rice"},
-            {"name":"Fish Maw Soup"},
-            {"name":"Fish Maw Potage"},
-            {"name":"Salted Vegetables Tofu Soup"},
-            {"name":"Bitter Gourd Soup"},
-            {"name":"San Lao Hor Fun"},
-            {"name":"Kway Teow Soup"},
-            {"name":"Hor Fun with Egg Gravy"},
-            {"name":"Mee Goreng"},
-            {"name":"Hokkien Mee"},
-            {"name":"Sin Chew Fried Bee Hoon"},
-            {"name":"Dry Hor Fun"}
-        ], 
-        "Desserts, Drinks":[
-            {"name":"Shaved Ice Dessert"},
-            {"name":"Mango Pudding"},
-            {"name":"Almond Longan Beancurd"},
-            {"name":"Chendol"},
-            {"name":"Bo Bo Cha Cha"},
-            {"name":"Burbor Hitam (warm)"},
-            {"name":"Mango Pudding"},
-            {"name":"Peanut Ice Kachung"},
-            {"name":"Red Bean Lotuc Seed"},
-            {"name":"Chinese Tea (Hot/Cold)"},
-            {"name":"Homemade Barley"},
-            {"name":"Lime Juice"},
-            {"name":"Lemongrass Drink"},
-            {"name":"Canned Drinks"},
-            {"name":"Tiger Beer"},
-            {"name":"Heineken"},
-            {"name":"Mineral Water"}
-
-        ]
+            "pork": [
+                {"name": "Sweet & Sour pork","price":"12.20"},
+                {"name": "Ginger & Spring Onion Sliced Pork","price":"14.20"},
+                {"name": "Bitter Gourd Pork Ribs","price":"11.90"},
+                {"name": "Butter Pork Ribs","price":"9.80"},
+                {"name": "Imperial Pork Ribs","price":"13.90"},
+                {"name": "Salted Egg Pork Ribs","price":"13.90"}
+            ],
+            "tofu_omelette":[
+                {"name":"Thai Style Tofu","price":"12.20"},
+                {"name":"Claypot Tofu","price":"9.80"},
+                {"name":"Fragrant Tofu with seasonal Vegetables","price":"11.20"},
+                {"name":"Hot Plate Tofu","price":"12.30"},
+                {"name":"Fu Young Omelette","price":"7.20"},
+                {"name":"Onion Omelette","price":"7.30"},
+                {"name":"Bitter Gourd Omelette","price":"9.90"},
+                {"name":"Minced Meat Omelette","price":"11.60"},
+                {"name":"Shrimp Omelette","price":"10.20"}
+            ],
+            "Fish":[
+                {"name":"Red Grouper","price":"14.70"},
+                {"name":"Fish Head Steamboat","price":"15.60"},
+                {"name":"BBQ Stingray","price":"17.90"},
+                {"name":"Claypot Fish Head","price":"17.30"},
+                {"name":"Sweet & Sour / Sambal / BBQ Seabass","price":"12.30"},
+                {"name":"Stir-Fried Fish Head with Bitter Gourd","price":"12.20"},
+                {"name":"Crispy Seabass with Preserved Radish","price":"14.00"},
+                {"name":"Black Pepper Sliced Fish","price":"12.30"},
+                {"name":"Dried Chilli Sliced Fish","price":"11.90"},
+                {"name":"Ginger & Spring Onion Sliced Fish","price":"12.90"},
+                {"name":"Sweet & Sour Sliced Fish","price":"11.90"}
+            ],
+            "Seafood":[
+                {"name":"Salted Egg Crab","price":"56.70"},
+                {"name":"Chilli Crab","price":"55.90"},
+                {"name":"Crab with Bee Hoon","price":"36.90"},
+                {"name":"Deep-Fried Seafood Stuffed You Tiao","price":"18.90"},
+                {"name":"Deep-Fried Baby Squid with Sweet & Spicy Sauce","price":"16.90"},
+                {"name":"Braised Sea Cucumber with Mushroom","price":"19.80"},
+                {"name":"Deep-Fried Prawns with Salad Sauce","price":"12.90"},
+                {"name":"Cereal Prawn ","price":"12.60"},
+                {"name":"Deep-Fried Prawns with Butter","price":"13.90"},
+                {"name":"Pan-Fried Prawns with Sambal","price":"13.90"},
+                {"name":"Salted Egg / Black Pepper / Sweet & Sour Prawns","price":"13.90"},
+                {"name":"Prawn Roll (Ngoh Hiang)","price":"12.90"},
+                {"name":"Deep-Fried Sotong","price":"11.90"},
+                {"name":"Cereal Sotong","price":"10.90"},
+                {"name":"Sambal Sotong","price":"10.90"},
+                {"name": "Salted Egg Sotong","price":"10.90"}
+            ],
+            "Vegetables":[
+                {"name":"Sambal Kang Kong","price":"12.90"},
+                {"name":"Kang Kong with Cuttlefish","price":"10.90"},
+                {"name":"Sambal Asparagus","price":"8.90"},
+                {"name":"Stir-Fried Chinese Spinach with Garlic","price":"10.90"},
+                {"name":"Baby Kailan with Garlic / Oyster Sauce / Sambal","price":"16.20"},
+                {"name":"Bean Sprouts with Salted Fish","price":"16.90"},
+                {"name":"Eggplant with Fish Floss","price":"10.90"},
+                {"name":"Stir-Fried Tiny Chinese Cabbage with Garlic","price":"12.80"},
+                {"name":"Tiny Chinese Cabbage Poached in Broth","price":"16.90"},
+                {"name":"Stir-Fried / Bean Paste Bitter Gourd","price":"12.80"},
+                {"name":"Bitter Gourd Sliced Fish with Bean Paste","price":"12.90"},
+                {"name":"Braised Mixed Vegetables (Luo Han Zhai)","price":"11.90"},
+                {"name":"Yam Ring with Prawns & Assorted Vegetables","price":"12.90"},
+                {"name":"Stir-Fried Four Season Beans with Preserved Radish ","price":"11.90"},
+                {"name":"Bak Choy / Hong Kong Kailan with Oyster Sauce","price":"11.90"},
+                {"name":"Bean Sprouts / Lettuce with Cuttlefish","price":"11.90"},
+                {"name":"Broccoli with Scallops","price":"13.90"},
+                {"name":"Kailan / Baby Kailan / Broccoli with Sliced Fish","price":"12.90"},
+                {"name":"Kailan / Baby Kailan / Broccoli with Prawn Fritters","price":"12.90"}
+            ],
+            "Soup,Rice,Noodles":[
+                {"name":"Seafood Fried Rice","price":"12.90"},
+                {"name":"Rice with Silky Gravy (Mui Fan)","price":"12.90"},
+                {"name":"Sambal Fried Rice","price":"13.90"},
+                {"name":"Salted Fish Fried Rice","price":"12.90"},
+                {"name":"Fish Maw Soup","price":"15.90"},
+                {"name":"Fish Maw Potage","price":"15.90"},
+                {"name":"Salted Vegetables Tofu Soup","price":"12.80"},
+                {"name":"Bitter Gourd Soup","price":"11.90"},
+                {"name":"San Lao Hor Fun","price":"11.80"},
+                {"name":"Kway Teow Soup","price":"12.95"},
+                {"name":"Hor Fun with Egg Gravy","price":"13.85"},
+                {"name":"Mee Goreng","price":"12.90"},
+                {"name":"Hokkien Mee","price":"12.90"},
+                {"name":"Sin Chew Fried Bee Hoon","price":"12.90"},
+                {"name":"Dry Hor Fun","price":"11.90"}
+            ], 
+            "Desserts, Drinks":[
+                {"name":"Shaved Ice Dessert","price":"4.70"},
+                {"name":"Mango Pudding","price":"4.70"},
+                {"name":"Almond Longan Beancurd","price":"4.70"},
+                {"name":"Chendol","price":"4.70"},
+                {"name":"Bo Bo Cha Cha","price":"6.70"},
+                {"name":"Burbor Hitam (warm)","price":"7.20"},
+                {"name":"Peanut Ice Kachung","price":"4.70"},
+                {"name":"Red Bean Lotuc Seed","price":"5.60"},
+                {"name":"Chinese Tea (Hot/Cold)","price":"0.80"},
+                {"name":"Homemade Barley","price":"2.40"},
+                {"name":"Lime Juice","price":"2.40"},
+                {"name":"Lemongrass Drink","price":"2.60"},
+                {"name":"Canned Drinks","price":"4.50"},
+                {"name":"Tiger Beer","price":"19.00"},
+                {"name":"Heineken","price":"21.00"},
+                {"name":"Mineral Water","price":"0.50"}
+            ]
+            },
+        "Bento Sets":{
+            "Speciality-Kampung Chicken":[
+                {"name":"Standard Chicken Rice Set (white)","price":"6.90"},
+                {"name":"Standard (roasted) Chicken Rice Set","price":"6.90"},
+                {"name":"Premium Chicken Rice set white","price":"9.90"},
+                {"name":"Premium Chicken Rice Set Roasted","price":"9.90"},
+                {"name":"Combo Chicken Rice set White","price":"11.70"},
+                {"name":"Combo Chicken Rice set Roasted","price":"11.70"}
+            ],
+            "Fish":[
+                {"name":"Sweet & Sour fish, Vegetable, KP chicken & rice set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Black Pepper Fish, Vegetable, KP Chicken and rice set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Gong Bao Fish,Vegetable,KP chicken & rice set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Ginger & Spring Onion Fish, Vegetable, KP chicken & rice set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Sweet & Sour Fish, vegetable and rice","price":"13.20","customisations": "set_13_20"},
+                {"name":"Black Pepper Fish, Vegetable and rice ","price":"13.20","customisations": "set_13_20"},
+                {"name":"Ginger &Spring Onion Fish, Vegetable and rice","price":"13.20","customisations": "set_13_20"},
+                {"name":"Gao Bao Fish, Vegetable and rice","price":"13.20","customisations": "set_13_20"}
+            ],
+            "Chicken Bentos":[
+                {"name":"Gong Bao Chicken, Vegetable Kampung Chicken and Rice Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Prawn Paste Chicken, Vegetable Kampung Chicken and Rice Bento set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Ginger & Spring Onion Diced Chicken, Vegetable, Kampung Chicken and Rice Bento Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Chicken with Basil, Chilli & Rice Wine, Vegetable, Kampung Chicken and Rice Bento set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Honey Ginger Diced Chicken, Vegetable, Kampung Chicken and Rice Bento set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Gao Bao Chicken, Vegetable and Rice Bento set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Prawn Paste Chicken, Vegetable and Rice set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Ginger & Spring Onion Diced Chicken, Vegetable and rice Bento set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Chicken with Basil, CHilli & Rice Wine, Vegetable and Rice Bento","price":"13.20","customisations": "set_13_20"},
+                {"name":"Honey Ginger Diced Chicken, Vegetable and Rice Bento Set","price":"13.20","customisations": "set_13_20"}
+            ],
+            "Pork":[
+                {"name":"Salted Egg Pork Ribs, Vegetable, Kampung Chicken And Rice Bento set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Sweet & Sour Pork, Vegetable, Kampung Chicken and Rice Bento Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Imperial Pork Ribs, Vegetable, Kampung Chicken and Rice Bento Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Hainanese Pork Chop, Vegetable, Kampung Chicken and Rice Bento Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Ginger & Spring Onion Sliced Pork, Vegetable, Kampung Chicken and Rice Bento","price":"18.20", "available_zones": ["East"], "customisations": "set_18_20"},
+                {"name":"Butter Pork Ribs, Vegetable, Kampung Chicken and Rice Bento Set","price":"18.20", "customisations": "set_18_20"},
+                {"name":"Salted Egg Pork Ribs, Vegetable and Rice Bento set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Sweet & Sour Pork, Vegetable and Dice Bento Set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Imperial Pork Ribs, Vegetable and Rice Bento Set ","price":"13.20","customisations": "set_13_20"},
+                {"name":"Hainanese Pork Chop, Vegetable and Rice Bento Set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Ginger & Spring Onion Sliced Pork, Vegetable and Rice bento set","price":"13.20","customisations": "set_13_20"},
+                {"name":"Butter Pork ribs, Vegetable and Rice Bento Set","price":"13.20", "available_zones": ["East"],"customisations": "set_13_20"}
+            ],
+            "Vegetarian":[               
+                {"name":"Vegetarian Braised Tofu (Hong Shao tofu) Bento Set","price":"13.20"},
+                {"name":"Vegetarian Braised Mixed Vegetables (Luo Han Zhai) Bento Set","price":"13.20"},
+                {"name":"Vegetarian Fried Rice with Vegetable","price":"13.20"},
+                {"name":"Vegetarian Friend Noodles with Vegetable","price":"13.20"},
+                {"name":"Vegetarian Friend Noodles with Vegetable","price":"13.20"}
+            ],
+            "Others":[                
+                {"name":"Fried Rice with Vegetables","price":"13.20"},
+                {"name":"Fried Rice with One meat ","price":"16.20"},
+                {"name":"Fried Noodles with Vegetable","price":"13.20"},
+                {"name":"Fried Noodles with 1 meat","price":"16.20"},
+                {"name":"Chicken Porridge with Vegetable","price":"12.00"},
+                {"name":"Braised egg","price":"1.30"},
+                {"name":"Braised Fish Head (non-spicy) half fish head","price":"29.00", "available_zones": ["East"]},
+                {"name":"Curry Fish Head (half fish head)","price":"29.90", "available_zones": ["East"]},
+                {"name":"Chicken rice (rice only)","price":"1.40", "available_zones": ["Central"]},
+                {"name":"White rice ","price":"1.40", "available_zones": ["Central"]},
+                {"name":"Set","price":"50.00"}]
         }
-}}
+       
+    },
+    "set_customisations":{
+                "set_18_20":{
+                    "veggie_type":["bak choy", "hk kai lan", "baby kai lan"],
+                    "chicken_choice": ["white", "roasted"],
+                    "chicken_type": ["No preference", "Breast", "Thigh", "Wing", "drum (+1.50)"],
+                    "drink_add_on": {
+                        "options":["ice lemon tea"],
+                        "price":["1.50"],
+                        "max_add" : 1
+                    } 
+                }, 
+                "set_13_20":{
+                    "veggie_type":["bak choy", "hk kai lan", "baby kai lan"],
+                    "drink_add_on": {
+                        "options":["ice lemon tea"],
+                        "price":["1.50"],
+                        "max_add": 1
+                    }
+                }
+            }
+}
