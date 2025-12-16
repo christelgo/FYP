@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Page-3</title>
     <style>
         body{
             padding: 0px 20px 20px 20px;
             background-color: #EFEBDF;
         }
         h1{
-            font-size: 60px;
+            font-size: 30px;
             padding-left: 0;
-            
-            margin: auto ;
+            /* border: 1px solid black; */
             padding-left: 10px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
         }
         .ala_carte ol{
             display: flex;
             overflow-x: auto;
             overflow-y: hidden;
             padding-bottom: 20px;
+            padding-top: 20px;
             scroll-padding-right: 40px;
             /* border: 1px solid purple; */
-            
             padding-left: 40px;
             padding-right: 40px;
             scrollbar-width: 0.1px;
-        
         }
 
         .ala_carte li{
@@ -42,6 +44,7 @@
             height: 300px;
             align-items: center;
             background-color: #928787;
+            
         }
 
         .ala_carte ol::-webkit-scrollbar{
@@ -58,28 +61,18 @@
             background: hsl(0, 0.7%, 72.7%) ; 
             border-radius: 20px;
         }
-        .omelette{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/omelette-.jpg");
-            background-size: cover;
-            background-position: center;
-            font-weight: bold;
-            color: white;
-            font-size: 40px;
-            background-color: rgba(255,255,255, 0.4);
-            background-blend-mode: multiply;
-        }
         .bento_sets ol{
             display: flex;
             overflow-x: auto;
             overflow-y: hidden;
             padding-bottom: 20px;
+            padding-top: 20px;
             scroll-padding-right: 40px;
-                /* border: 1px solid purple; */
+        
             margin-top: 20px;
             padding-left: 40px;
             padding-right: 40px;
-            scrollbar-width: 0.1px;
-            
+            scrollbar-width: 0.1px;     
         }
 
         .bento_sets li{
@@ -95,7 +88,6 @@
             align-items: center;
             background-color: #928787;
         }
-
         .bento_sets ol::-webkit-scrollbar{
             height:  8px;
             /* border: 1px solid red; */
@@ -121,8 +113,97 @@
             box-shadow: none !important;
             border-radius: 10px;
         }
-        
+        /* .chef{ kinda weird if the name already states chef recommendations
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/chefrecommendations.webp");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        } */
+
+        .omelette{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/omelette-.jpg");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .seafood{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/Chilli_Crab_Jelco.webp");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
     
+        }
+        .fish{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/fish.jpg");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .vegetables{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/vegetable.jpg");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+          
+        }
+        .chicken{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/chicken.webp");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+            
+        }
+        .pork{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/pork.jpg");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .staples{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/staples.avif");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .drinks{
+            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/drinks.jpeg");
+            background-color: rgba(255,255,255, 0.4);
+            background-blend-mode: multiply;
+        }
+        .ala_carte_categories li{
+            font-weight: bold;
+            color: white;
+            font-size: 40px;
+            background-size: cover;
+            background-position: center;
+
+            transition: transform 0.1s ease, border 0.1s ease, box-shadow 0.1s ease;
+            border-radius: 10px;
+        }
+        .ala_carte_categories li:hover{
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(0,0,0, 0.3);
+            border: 3px solid #EFEBDF;
+        }
+
+        .ala_carte_categories li.active{
+            transform: scale(1.2);
+            border:3px solid #EFEBDF;
+            background-color: rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .bento_set_categories li{
+            font-weight: bold;
+            color: white;
+            font-size: 40px;
+            transform-origin: 0.1s, border 0.1s ease, box-shadow 0.1s ease;
+            border-radius: 10px;
+        }
+        .bento_set_categories li:hover{
+            transform: scale(1.15);
+            box-shadow: 0 4px 12ox rgba(0,0,0,0.3);
+            border: 3px solid #EFEBDF;
+        }
+        .bento_set_categories li:active{
+            transform: scale(1.2);
+            border: 3px solid #EFEBDF;
+            background-color: rgba(0,0,0,0.3);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+
+        
     </style>
     
 </head>
@@ -131,32 +212,122 @@
         <h1>Ala Carte</h1>
         <ol class="ala_carte_categories"> 
             <!-- this is ala carte -->
-            <li class="chef">Chef's Recommendations</li>
-            <li class="chicken">Chicken</li>
-            <li class="pork">Pork</li>
-            <li class="seafood">Seafood</li>
-            <li class="omelette">Omelette</li>
-            <li class="fish">Fish</li>
-            <li class="vegetables">Vegetables</li>
-            <li class="staples">Rice</li>
-            <li class="drinks">Drinks and Desserts</li>
+            <li class="chef"><a href="">Chef's Recommendations</a></li>
+            <li class="chicken"><a href="">Chicken</a></li>
+            <li class="pork"><a href="">Pork</a></li>
+            <li class="seafood"><a href="">Seafood</a></li>
+            <li class="omelette"><a href="">Omelette</a></li>
+            <li class="fish"><a href="">Fish</a></li>
+            <li class="vegetables"><a href="">Vegetables</a></li>
+            <li class="staples"><a href="">Rice</a></li>
+            <li class="drinks"><a href="">Drinks and Desserts</a></li>
         </ol>
+
+        <div class="category-scroll">
+            <section id="chef" class="scroll-section"></section>
+            <section id="chicken"class="scroll-section"></section>
+            <section id="pork"class="scroll-section"></section>
+            <section id="seafood"class="scroll-section"></section>
+            <section id="omelette"class="scroll-section"></section>
+            <section id="fish"class="scroll-section"></section>
+            <section id="vegetables"class="scroll-section"></section>
+            <section id="staples"class="scroll-section"></section>
+            <section id="drinks" class="scroll-section"></section>
+        </div>
+
+
    </div>
    <div class="bento_sets">
         <h1>Bento Sets</h1>
-        <ol class="bento_set_catagories">
+        <ol class="bento_set_categories">
             <!-- this is bentos -->
-            <li><a href="bento_order.html">Speciality-Kampung Chicken</a></li>
-            <li>Fish</li>
-            <li>Regular Chicken</li>
-            <li>Pork</li>
-            <li>Vegetarian</li>
-            <li>Others</li>
+            <li class="special"><a href="">Speciality-Kampung Chicken</a></li>
+            <li class="b-fish">Fish</li>
+            <li class="b-chicken">Regular Chicken</li>
+            <li class="b-pork">Pork</li>
+            <li class="vegetarian">Vegetarian</li>
+            <li class="others">Others</li>
         </ol>
+        <div class="category-scroll bento-scroll">
+            <section id="special" class="scroll-section"></section>
+            <section id="b-fish" class="scroll-section"></section>
+            <section id="b-chicken" class="scroll-section"></section>
+            <section id="b-pork" class="scroll-section"></section>
+            <section id="vegetarian" class="scroll-section"></section>
+            <section id="others" class="scroll-section"></section>
+        </div>
        </div>
     <button><a href="Personal_info.html">back</a></button>
     <script>
+        // js for ala carte
+        document.addEventListener("DOMContentLoaded", () =>{
 
+            const sections= document.querySelectorAll("section");
+            const navItems = document.querySelectorAll(".ala_carte_categories li");
+
+            const observer = new IntersectionObserver((entries) =>{
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting){
+
+                        const id = entry.target.id;
+
+                        navItems.forEach(li => li.classList.remove("active"));
+
+                        const matching = document.querySelector('.ala_carte_categories li.${id}');
+
+                        if (matching){
+                            matching.classList.add("active");
+                        }
+                    }
+                });
+            },{
+                threshold:0.4
+            });
+            sections.forEach(sec => observer.observe(sec));
+        });
+        document.querySelectorAll(".ala_carte_categories li").forEach(li =>{
+            li.addEventListener("click",() =>{
+                const id= li.className;
+                const section = document.getElementById(id);
+
+                const container = document.querySelector(".category-scroll");
+                container.scrollTo({
+                    left: section.offsetleft,
+                    behavior:"smooth"
+                });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", ()=>{
+            const bentosections = document.querySelectorAll(".bento_sets    .scroll-section");
+            const bentoTabs = document.querySelectorAll(".bento_set_categories li");
+            const bentocontainer = document.querySelector(".bento_sets  .category-scroll");
+
+            const bentoObserver = new IntersectionObserver((entries)=>{
+                entries.forEach(entry =>{
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+
+                        bentoTabs.forEach(li => li.classList.remove("active"));
+                        const match = document.querySelector('.bento_set_categories li.${id}');
+                        if (match) match.classList.add(active);
+                    }
+                });
+            },{
+                threshold: 0.5
+            });
+            bentoTabs.forEach(li => {
+                li.addEventListener("click",() =>{
+                    const id = li.className;
+                    const section = document.getElementById(id);
+
+                    bentocontainer.scrollTo({
+                        left: section.offsetLeft,
+                        behavior:"smooth"
+                    });
+                });
+            });
+        })
     </script>
 </body>
 </html>
