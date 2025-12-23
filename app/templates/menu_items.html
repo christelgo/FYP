@@ -10,29 +10,43 @@
         }
         .shopping-cart{
             background: none;
+            /* position: fixed;
+            top: 12px;
+            right: 16px;
+            z-index: 1000; */
         }
-        .shopping-cart icon{
-            justify-content: right;
-            padding: 30px;
-            border: 1px solid red;
-        }
-        .shopping-cart img{
+
+        /* .shopping-cart img{
             width: 50px;
             height: 50px;
             object-fit: fill;
-        }
+        } */
         
         ul{
             list-style: none;
             border: 1px solid black;
             display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            max-width: calc(100vw - 120px);
+        }
+        ul::-webkit-scrollbar{
+            display: none;
         }
         .top-nav{
             border: 1px solid brown;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0px;
+
+
+            padding: 15px;
+            background: #EFEBDF;
+
+            border-bottom: 2px solid #ccc;
+            box-sizing: border-box;
+            max-width: 100%;
+            overflow: hidden;
         }
          li{
             padding: 20px;
@@ -65,7 +79,6 @@
             width: 100%;
             height: 300px;
             text-align: center;
-
             
         }
         .item-quantity{
@@ -86,14 +99,6 @@
             font-size: 20px;
             border: none;
             cursor: pointer;
-        }
-        .top-nav{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background: #EFEBDF;
-            border-bottom: 2px solid #ccc;
         }
         .cat{
             font-size: 30px;
@@ -117,36 +122,66 @@
             font-size: 18px;
             cursor: pointer;
         }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        @media (max-width: 768px) {
+            .top-nav{
+                flex-direction: row;
+                align-items: center;
+            }
+            .cat{
+                font-size: 28px;
+            }
+            ul{
+                max-width: 100%;
+                overflow-x: auto;
+            }
+            .menu-grid{
+                grid-template-columns: 1fr;
+            }
+        }
 
     </style>
 </head>
 <body>    
-    
     <nav class="top-nav">
-        <!-- // click this: the different categories would pop up -->
         <button class="cat" onclick="ToggleNav()">☰</button>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#chicken">Chicken</a></li>
-            <li><a href="#pork">Pork</a></li>
-            <li><a href="#veg">Vegetarian</a></li>
-            <li><a href="#others">Others</a></li>
-        </ul>
-        <button class="shopping-cart"><img src="C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/shopping-bag.png" alt="" class="icon"></button>
+        {% set nav_categories = MENU["categories"][menu_type] %}
+        <div class="menu-section nav-links" id="navLinks">
+            <h3>{{menu_type.replace("_"," ").title() }}</h3>
+            <ul>
+                {% for category_key in nav_categories.keys() %}
+                <li>
+                    <a href="/api/menu/{{ menu_type | urlencode}}/{{ category_key | urlencode}}">
+                        {{ category_key.replace("_"," ").replace(","," &")}}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <button class="shopping-cart">shopping-cart</button>
     </nav>
 
     <div class="menu-grid">
         {% for item in items %}
-        <div class="menu-item"
-        data-id = "{{menu_type}}-{{category}}-{{loop.index}}">
-            <div class="item-image">image</div>
+        <div class="menu-item" data.id="{{loop.idex}}">
+
+            <h3>{{ item.name }}</h3>
+            <p>$ {{ "%.2f"|format(item.price) }}</p>
+
             <div class="item-quantity">
                 <button class="qty-btn minus">-</button>
                 <span class="qty-value">0</span>
-                <button class="qty-btn add">+</button>
+                {% set set_key = item.get('customisations') %}
+                <button class="qty-btn add"
+                data-name = "{{item.name}}"
+                data-price = "{{item.price}}"
+                data-customisations ='{{set_customisations[set_key] | tojson if set_key and set_key in set_customisations else ""}}'>+</button>
             </div>
-        </div>        
-        {% endfor %}
         </div>
+        {% endfor %}
         
     </div>
     <div><button class="back-btn">back</button></div>
@@ -176,6 +211,9 @@
     });
         function ToggleNav(){
             document.getElementById("navLinks").classList.toggle("show");
+        };
+        function openCustomisation(customisations, name, price){
+            console.log("OK:",customisations, name, price);
         }
     </script>
 </body>
