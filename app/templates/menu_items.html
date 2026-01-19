@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4.1</title>
+    <title>{{ menu_type.replace('_', ' ').title()}} -
+        {{ category.replace('_', ' & ').title() }}
+    </title>
     <style>
         body{
             background-color: #EFEBDF;
@@ -53,11 +55,6 @@
             border: 1px solid black;
             margin-right:10px;
          }
-        .cat{
-            font-size: 24px;
-            background: none;
-            cursor: pointer;
-        }
         .menu-grid{
             border: 1px solid black;
             display: grid;
@@ -126,21 +123,82 @@
             text-decoration: none;
             color: black;
         }
-        @media (max-width: 768px) {
-            .top-nav{
-                flex-direction: row;
-                align-items: center;
-            }
-            .cat{
-                font-size: 28px;
-            }
-            ul{
-                max-width: 100%;
-                overflow-x: auto;
-            }
-            .menu-grid{
-                grid-template-columns: 1fr;
-            }
+        .modal{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .modal-content{
+            background:#fff;
+            padding: 20px;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 8px;
+        }
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 2000;
+        }
+
+        .cart-overlay.hidden {
+            display: none;
+        }
+
+        .cart-modal {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 16px 16px 0 0;
+            padding: 16px;
+            animation: slideUp 0.25s ease;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-footer {
+            margin-top: 16px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background: #111;
+            color: white;
+            border-radius: 8px;
+            border: none;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .hidden{
+            display: none;
         }
 
     </style>
@@ -150,7 +208,14 @@
         <button class="cat" onclick="ToggleNav()">☰</button>
         {% set nav_categories = MENU["categories"][menu_type] %}
         <div class="menu-section nav-links" id="navLinks">
-            <h3>{{menu_type.replace("_"," ").title() }}</h3>
+            <button>{{menu_type.replace("_"," ").title() }}</button>
+
+            {% set ala_first = MENU["categories"]["ala_carte"].keys() | list | first %}
+            {% set bento_first = MENU["categories"]["Bento_Sets"].keys() | list | first %}
+            <div>
+                <a href="{{ url_for('menu.show_menu', menu_type='ala_carte', category = ala_first)}}">Ala Carte</a>
+                <a href="{{ url_for('menu.show_menu', menu_type='Bento_Sets', category = bento_first)}}">Bento Sets</a>
+            </div>
             <ul>
                 {% for category_key in nav_categories.keys() %}
                 <li>
@@ -161,12 +226,16 @@
                 {% endfor %}
             </ul>
         </div>
-        <button class="shopping-cart">shopping-cart</button>
+        <button class="shopping-cart" onclick="openCart()">shopping-cart
+            <span id="cart-badge hidden">0</span>
+        </button>
     </nav>
 
     <div class="menu-grid">
         {% for item in items %}
-        <div class="menu-item" data.id="{{loop.idex}}">
+        
+        <div class="menu-item"
+            data-id="{{ item.base_id }}">
 
             <h3>{{ item.name }}</h3>
             <p>$ {{ "%.2f"|format(item.price) }}</p>
@@ -174,19 +243,252 @@
             <div class="item-quantity">
                 <button class="qty-btn minus">-</button>
                 <span class="qty-value">0</span>
-                {% set set_key = item.get('customisations') %}
+                {%  set custom_json = set_customisations[item.customisations] | tojson
+                if item.customisations else '' %}
                 <button class="qty-btn add"
-                data-name = "{{item.name}}"
-                data-price = "{{item.price}}"
-                data-customisations ='{{set_customisations[set_key] | tojson if set_key and set_key in set_customisations else ""}}'>+</button>
+                data-name = "{{  item.name  }}"
+                data-price = "{{  item.price  }}"
+                data-setkey = "{{ item.customisations or '' }}"
+                data-customisations = '{{custom_json }}'>
+                +</button>
             </div>
         </div>
         {% endfor %}
-        
     </div>
-    <div><button class="back-btn">back</button></div>
+    <div id="customisationModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modalItemName"></h2>
+            <form action="" id="customisationForm"></form>
+            <button type="button" id="confirmCustomisation">Confirm</button>
+            <button type="button" onclick="closeCustomisation()">Cancel</button>
+        </div>
+    </div>
+    <form action="{{ url_for('order_bp.checkout')}}" method="POST" id="checkout-form">
+        <input type="hidden" name="cart_data" id="cart_data">
+
+        <div id = "cartOverlay" class="cart-overlay hidden" onclick="closeCart(event)">
+        <div class="cart-modal" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h3>Your Cart</h3>
+                <button class="close-btn" onclick="closeCart()"> x </button>
+            </div>
+
+            <div id="cart-items"></div>
+            <div class="cart-footer">
+                <strong>Total: $<span id="cart-total">0.00</span></strong>
+                <button class="checkout-btn" onclick="submitCart()">Checkout</button>
+                <button class="clear-cart-btn" onclick="clearCart()"> Clear</button>
+                
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+    <div>
+        <button class="back-btn" >Back</button>
+        <button >Checkout</button>
+    </div>
 
     <script>
+        console.log("PAGE MENU TYPE = ", "{{ menu_type }}");
+        const PAGE_MENU_TYPE = " {{  menu_type  }}"
+
+        let cart =JSON.parse(localStorage.getItem("cart")) || [];
+        let currentItem = null; 
+
+        function updateCartUI(){
+            const container = document.getElementById("cart-items");
+            container.innerHTML = "";
+
+            if (cart.length === 0) {
+                container.innerHTML = "<p class = 'empty-cart'> Your cart is empty</p>";
+                return;
+            }
+
+            cart.forEach(item => {
+               let customisationHTML = "";
+
+               if (item.customisations){
+                for (const [group,values] of Object.entries(item.customisations)) {
+                    customisationHTML += `
+                    <div class="cart-customisation">
+                        <em>${group.replace("_", "")}:</em>
+                        ${values.join(",")}
+                        </div>
+                    `;
+                }
+               }
+               container.innerHTML +=`
+               <div class="cart-item">
+                <strong>${item.name}</strong> x ${item.quantity}<br>
+                ${customisationHTML}
+                <div class="cart-price">$${((item.base_price +(item.add_on_price || 0))* item.quantity).toFixed(2)}
+                    </div>
+                    </div>
+               `;
+            });
+        }
+        function syncMenuQuantities(){
+            console.log("SYNC START", cart);
+
+            document.querySelectorAll(".menu-item").forEach(menuItem => {
+                const baseId = menuItem.dataset.id;
+                const qtySpan = menuItem.querySelector(".qty-value");
+
+                const totalQty = cart
+                    .filter(item => item.baseId === baseId)
+                    .reduce((sum, item) => sum + item.quantity, 0);
+                    qtySpan.textContent = totalQty;
+            });
+            console.log("SYNC END");
+        }
+        
+        function saveCart(){
+            localStorage.setItem("cart", JSON.stringify(cart))
+        }
+        function cartTotal(){
+            let total =0;
+
+            cart.forEach(item => {
+                const itemTotal = (item.base_price + (item.add_on_price || 0))* item.quantity;
+                 total += itemTotal;
+            });
+            document.getElementById("cart-total").textContent = total.toFixed(2);
+        }
+        
+        function normalisedId(str){
+            return str 
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "_")
+            .replace(/^_+|_+$/g, "");
+        }
+        
+        function clearCart(){
+            cart = [];
+            saveCart();
+
+            updateCartUI();
+            syncMenuQuantities();
+            cartTotal();
+        
+
+            console.log("Cart cleared");
+        }
+
+        function addToCart(item) {
+            const existingIndex = cart.findIndex(cartItem =>
+                cartItem.id === item.id &&
+                JSON.stringify(cartItem.customisations) === JSON.stringify(item.customisations)
+            );
+
+            if (existingIndex !== -1){
+                cart[existingIndex].quantity += item.quantity;
+            } else {
+                cart.push(item);
+            }
+            saveCart();
+            updateCartUI();
+            syncMenuQuantities();
+            cartTotal();
+        };
+
+        function addAlaCartetoCart(name,price){
+            const baseId = normalisedId(name);
+
+            const item ={
+                id: baseId, 
+                baseId,
+                type: "",
+                name,
+                base_price: price,
+                quantity:1,
+                customisations: null
+            };
+            addToCart(item);
+        };
+        function openCustomisation(customisations, name, setKey){
+            if (!setKey){
+                console.error("openCustomisation ");
+                return;
+            }
+            if (!customisations || typeof customisations !=="object"){
+                console.error("Invalid customisations", customisations);
+                return;
+            }
+            currentItem = { name, setKey, customisations};
+
+
+            document.getElementById("modalItemName").textContent =
+            `${name} (${setKey === "set_18_20" ? "$18.20 Set ": "$13.20 Set"})`;
+
+            const form = document.getElementById("customisationForm");
+            form.innerHTML="";
+
+            for (const [group, config ] of Object.entries(customisations)){
+                if (!config.options || !Array.isArray(config.options)){
+                    console.warn("Invalid config:", group, config);
+                    continue;
+                }
+                const section = document.createElement("div");
+                section.innerHTML = `<h4>${group.replace("_"," ")}</h4>`;
+
+                const inputType = config.max_add ? "checkbox": "radio";
+
+                config.options.forEach(opt => {
+                    section.innerHTML += `
+                    <label>
+                        <input
+                        type= "${inputType}"
+                        name = "${group}"
+                        value = "${opt.label}"
+                        data-price = "${opt.price || 0}"> ${opt.label}${opt.price ? `  (+$${opt.price.toFixed(2)})`:""}</label><br>`;
+                });
+
+            form.appendChild(section)};
+            document.getElementById("customisationModal").classList.remove("hidden"); 
+        }
+        
+        function closeCustomisation(){
+            document.getElementById("customisationModal").classList.add("hidden");
+        }
+        function removefromCart(baseId){
+            const index = cart.findLastIndex(item => item.baseId === baseId);
+
+            if (index === -1) return;
+
+            if (cart[index].quantity > 1){
+                cart[index].quantity --;
+            } else {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            updateCartUI();
+            syncMenuQuantities();
+            cartTotal();
+        }
+
+        function ToggleNav(){
+            document.getElementById("navLinks").classList.toggle("show");
+        };
+        function openCart(){
+            document.getElementById("cartOverlay").classList.remove("hidden");
+        }
+        function closeCart(e){
+            if (!e || e.target.id === "cartOverlay"){
+                document.getElementById("cartOverlay").classList.add("hidden");
+            }
+        }
+        function submitCart(){
+            cart = JSON.parse(localStorage.getItem("cart")) || [];
+            console.log("Cart at submit:", cart);
+            if (cart.length === 0) {
+                alert("Your Cart is empty");
+                return;
+            }
+            document.getElementById("cart_data").value = JSON.stringify(cart);
+            document.getElementById("checkout-form").submit();
+        }
         // add and subtract button for all
         document.addEventListener("DOMContentLoaded", function (){
             const menuItems = document.querySelectorAll(".menu-item");
@@ -196,25 +498,77 @@
                 const addBtn = item.querySelector(".add");
                 const qtyValue = item.querySelector(".qty-value");
 
-            let quantity= 0;
-
-
             addBtn.addEventListener("click", function() {
-                quantity++;
-                qtyValue.textContent = quantity;});
+                console.log("Plus click", addBtn.dataset);
+
+                const setKey = addBtn.dataset.setkey;
+                const rawCustomisations = addBtn.dataset.customisations;
+
+                if ( setKey && rawCustomisations ){
+                    openCustomisation(
+                        JSON.parse(rawCustomisations),
+                        addBtn.dataset.name,
+                        setKey
+                    );
+
+                    return;
+                }
+
+                addAlaCartetoCart(
+                    addBtn.dataset.name,
+                    parseFloat(addBtn.dataset.price)
+                );
+
+            });
 
             minusBtn.addEventListener("click", function() {
-                if (quantity>0){
-                    quantity--;
-                    qtyValue.textContent=quantity;} });
+                const baseId= item.dataset.id;
+                removefromCart(baseId);
+                console.log("Clicked Minus", baseId)
+
+
+                removefromCart(baseId);
+                });
+            });
+            updateCartUI();
+            syncMenuQuantities();
+            cartTotal();
         });
-    });
-        function ToggleNav(){
-            document.getElementById("navLinks").classList.toggle("show");
-        };
-        function openCustomisation(customisations, name, price){
-            console.log("OK:",customisations, name, price);
-        }
+
+        document.getElementById("confirmCustomisation").onclick = function () {
+            const form = document.getElementById("customisationForm");
+            const selected = {};
+            let addOnTotal = 0;
+            // why here is currentitem but not the above
+            const baseId = normalisedId(currentItem.name); 
+            form.querySelectorAll("input:checked").forEach(input => {
+                const group = input.name;
+                const value = input.value;
+                const price = parseFloat(input.dataset.price || 0);
+
+                if (!selected[group]) selected[group] = [];
+                selected[group].push(value);
+
+                addOnTotal += price;
+            });
+
+            const item = {
+                id: `${baseId}_${currentItem.setKey}_${JSON.stringify(selected)}`,
+                baseId,
+                type: "bento",
+                name: currentItem.name,
+                base_price: currentItem.setKey ==="set_18_20" ? 18.20  : 13.20,
+                add_on_price: addOnTotal,
+                quantity: 1,
+                customisations: selected
+            };
+            console.log("CONFIRMED", item);
+            addToCart(item);
+            closeCustomisation();
+            };
+        document.querySelector("form").addEventListener("submit", function(){
+            document.getElementById("cartData").value = JSON.stringify(cart);
+        });
     </script>
 </body>
 </html>

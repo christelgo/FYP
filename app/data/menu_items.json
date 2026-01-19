@@ -129,7 +129,7 @@
                 {"name":"Mineral Water","price":0.50}
             ]
             },
-        "Bento Sets":{
+        "Bento_Sets":{
             "Speciality-Kampung Chicken":[
                 {"name":"Standard Chicken Rice Set (white)","price":6.90},
                 {"name":"Standard (roasted) Chicken Rice Set","price":6.90},
@@ -198,22 +198,45 @@
     },
     "set_customisations":{
                 "set_18_20":{
-                    "veggie_type":["bak choy", "hk kai lan", "baby kai lan"],
-                    "chicken_choice": ["white", "roasted"],
-                    "chicken_type": ["No preference", "Breast", "Thigh", "Wing", "drum (+1.50)"],
+                    "Choice_Of_Vegetable":{
+                        "options":[
+                            {"label":"Bak Choy" }, 
+                            {"label":"Hong Kong Kai Lan"}, 
+                            {"label":"Baby Kai Lan"}]
+                    },
+                    "Choice_Of_Chicken":{
+                        "options": [
+                            {"label":"Roasted"},
+                            {"label":"Steamed"}
+                        ]
+                    },
+                    "Part_of_Chicken": {
+                        "options":[{"label": "No Prefernce"},
+                        {"label": "Breast"},
+                        {"label":"Thigh"},
+                        {"label": "Wing"},
+                        {"label": "Drum", "price": 1.50}]
+                    },
                     "drink_add_on": {
-                        "options":["ice lemon tea"],
-                        "price":1.50,
-                        "max_add" : 1
+                        "options":[
+                            {"label":"Ice Lemon Tea", "price": 1.50}
+                        ],
+                        "max_add":1
                     } 
                 }, 
                 "set_13_20":{
-                    "veggie_type":["bak choy", "hk kai lan", "baby kai lan"],
+                    "Choice_Of_Vegetable":{
+                        "options":[
+                            {"label":"Bak Choy" }, 
+                            {"label":"Hong Kong Kai Lan"}, 
+                            {"label":"Baby Kai Lan"}]
+                    },
                     "drink_add_on": {
-                        "options":["ice lemon tea"],
-                        "price":1.50,
-                        "max_add": 1
+                        "options":[
+                            {"label":"Ice Lemon Tea", "price": 1.50}
+                        ],
+                        "max_add":1
                     }
                 }
-            }
+                }
 }

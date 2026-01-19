@@ -73,14 +73,15 @@
     </div>
     <div class="buttons">
         <button class="btn">
-           <a href="Personal_info.html"> 
-            <img src="C:\Users\chris\OneDrive\Desktop\FYP\app\static\images\delivery-truck.png" alt="" class="icon">
+            <a href="{{ url_for('menu.set_order_type', type='delivery') }}">
+            <img src="{{ url_for('static', filename='images/delivery-truck.png')}}" alt="" class="icon">
             <b>Delivery</b></a>
         </button>
 
         <button class="btn">
-            <img src="C:\Users\chris\OneDrive\Desktop\FYP\app\static\images\pickup.png" alt="" class="icon2">
-            <b>Pick Up</b>
+            <a href="{{ url_for('menu.set_order_type', type='pickup') }}">
+            <img src="{{ url_for('static', filename='images/shopping-bag.png')}}" alt="" class="icon2">
+            <b>Pick Up</b></a>
         </button>
     </div></main>
 </body>
