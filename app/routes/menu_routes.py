@@ -8,35 +8,49 @@ menu_bp = Blueprint("menu", __name__,)
 def test_menu():
     return "MENU ROUTES WORK"
 
-@menu_bp.route("/")
+@menu_bp.route("/catalouge")
 def show_catalouge():
-    order_type = request.args.get("type")
-    session["order_type"] = order_type
-    return render_template("catalouge.html", order_type = order_type) 
+    order_type = session.get("order_type")
+    zone = session.get("zone")
 
-@menu_bp.route("/set-order-type/<type>")
-def set_order_type(type):
-    session["order_type"] = type
+    if not order_type or not zone:
+        return redirect(url_for("order_bp.personal_info"))
+        
+    if order_type =="pickup" and not session.get("outlet_id"):
+        return redirect(url_for("order_bp.personal_info"))
+    
+    return render_template("catalouge.html", order_type = order_type, zone = zone, outlet_name = session.get("outlet_name")) 
+
+@menu_bp.route("/set-order-type", methods=["POST"])
+def set_order_type():
+    order_type = request.form.get("order_type")
+    session["order_type"] = order_type
     return redirect(url_for("order_bp.personal_info"))
 
 
 @menu_bp.route("/<menu_type>/<category>")
 def show_menu(menu_type, category):
+    order_type = session.get("order_type")
+    zone = session.get("zone")
+
+    if not order_type or not zone:
+        return redirect(url_for("order_bp.personal_info"))
+    
     try:
         items = MENU["categories"][menu_type][category]
         items = prepare_menu(items)
         
     except KeyError:
         return "Menu not found"
-    
-    ala_first = next(iter(MENU["categories"]["ala_carte"]))
-    bento_first = next(iter(MENU["categories"]["Bento_Sets"]))
 
     return render_template(
         "menu_items.html",
         items = items,
         menu_type = menu_type,
         category = category,
+        order_type=order_type,
+        zone=zone,
         MENU=MENU,
-        set_customisations = MENU["set_customisations"]
+        set_customisations = MENU.get("set_customisations", {})
     )
+

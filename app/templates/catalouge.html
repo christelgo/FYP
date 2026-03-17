@@ -120,45 +120,46 @@
         } */
 
         .omelette{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/omelette-.jpg");
+            background-image: url("{{url_for('static',filename='images/omelette-.jpg') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
         }
         .seafood{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/Chilli_Crab_Jelco.webp");
+            background-image: url("{{url_for('static', filename='images/Chilli_Crab_Jelco.webp') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
     
         }
+
         .fish{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/fish.jpg");
+            background-image: url("{{url_for('static', filename='images/fish.jpg') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
         }
         .vegetables{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/vegetable.jpg");
+            background-image: url("{{url_for('static', filename='images/vegetable.jpg') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
           
         }
         .chicken{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/chicken.webp");
+            background-image: url("{{url_for('static', filename='images/chicken.webp') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
             
         }
         .pork{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/pork.jpg");
+            background-image: url("{{ url_for('static', filename='images/pork.jpg') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
         }
         .staples{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/staples.avif");
+            background-image: url("{{ url_for('static' , filename='images/staples.avif') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
         }
         .drinks{
-            background-image: url("C:/Users/chris/OneDrive/Desktop/FYP/app/static/images/drinks.jpeg");
+            background-image: url("{{ url_for('static', filename='images/drinks.jpeg') }}");
             background-color: rgba(255,255,255, 0.4);
             background-blend-mode: multiply;
         }
@@ -212,15 +213,14 @@
         <h1>Ala Carte</h1>
         <ol class="ala_carte_categories"> 
             <!-- this is ala carte -->
-            <li class="chef"><a href="">Chef's Recommendations</a></li>
-            <li class="chicken"><a href="">Chicken</a></li>
-            <li class="pork"><a href="">Pork</a></li>
-            <li class="seafood"><a href="">Seafood</a></li>
-            <li class="omelette"><a href="">Omelette</a></li>
-            <li class="fish"><a href="">Fish</a></li>
-            <li class="vegetables"><a href="">Vegetables</a></li>
-            <li class="staples"><a href="">Rice</a></li>
-            <li class="drinks"><a href="">Drinks and Desserts</a></li>
+            <li class="chicken"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='chicken')}}">Chicken</a></li>
+            <li class="pork"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='pork')}}">Pork</a></li>
+            <li class="seafood"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='Seafood')}}">Seafood</a></li>
+            <li class="omelette"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='chicken')}}">Omelette</a></li>
+            <li class="fish"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='Fish')}}">Fish</a></li>
+            <li class="vegetables"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='Vegetables')}}">Vegetables</a></li>
+            <li class="staples"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='Soup_Rice_Noodles')}}">Rice</a></li>
+            <li class="drinks"><a href="{{ url_for('menu.show_menu', menu_type= 'ala_carte', category ='Desserts_Drinks')}}">Drinks and Desserts</a></li>
         </ol>
 
         <div class="category-scroll">
@@ -241,12 +241,12 @@
         <h1>Bento Sets</h1>
         <ol class="bento_set_categories">
             <!-- this is bentos -->
-            <li class="special"><a href="">Speciality-Kampung Chicken</a></li>
-            <li class="b-fish">Fish</li>
-            <li class="b-chicken">Regular Chicken</li>
-            <li class="b-pork">Pork</li>
-            <li class="vegetarian">Vegetarian</li>
-            <li class="others">Others</li>
+            <li class="special"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Speciality-Kampung Chicken')}}">Speciality-Kampung Chicken</a></li>
+            <li class="b-fish"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Fish')}}">Fish</a></li>
+            <li class="b-chicken"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Chicken Bentos')}}"> Chicken</a></li>
+            <li class="b-pork"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Pork')}}">Pork</a></li>
+            <li class="vegetarian"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Vegetarian')}}">Vegetarian</a></li>
+            <li class="others"><a href="{{ url_for('menu.show_menu', menu_type= 'Bento_Sets', category ='Others')}}">Others</a></li>
         </ol>
         <div class="category-scroll bento-scroll">
             <section id="special" class="scroll-section"></section>

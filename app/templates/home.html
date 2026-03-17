@@ -6,83 +6,104 @@
     <title>Document</title>
     <style>
         body{
-            text-align:center;
-            padding: auto;
-            background-color: #EFEBDF;
-            border-color: black;
-            border: 2px solid black;
-        }
-        .container{
-            padding-bottom:20px;
-            /* border: 2px solid blue; */
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-bottom: 40px;
             text-align: center;
-            height: 400px;
+            background-color: #EFEBDF;
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
+
+        .container{
+            margin: 30px auto 40px;
+            text-align: center;
+        }
+
         .container .logo{
-            width: 400px;
+            width: 300px;
+            max-width: 80%;
         }
+
         section{
-            border: 2px solid green;
-            padding: 30px;
-            width: 70px;
-            margin-right: 20px;
-            margin-left: auto;
-            margin-bottom: 20px;
-            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 20px auto;
             background-color: #7f8985;
-            font-size: 30px;
-            border-radius: 5;
-    
+            font-size: 20px;
+            border-radius: 8px;
         }
-        buttons{
-            padding-bottom: 20px;
+
+        .buttons{
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 32px;
+            margin-bottom: 40px;
         }
+
         .btn{
-            background-color:#7f8985 ;
-            height: 240px;
-            width: 240px;
-            margin-left: 50px;
-            margin-right: 50px;
-            margin-bottom: 50px;
-            font-size: 55px;
-            padding-bottom: 0px;
-            box-shadow: none !important;
-    
+            background-color: #7f8985;
+            width: 200px;
+            height: 200px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 26px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
-        a {
+
+        .btn:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        a{
             text-decoration: none;
             color: black;
         }
 
         .btn .icon{
-            width: 120px;
+            width: 80px;
         }
+
         .btn .icon2{
-            width: 110px;
+            width: 72px;
         }
     </style>
 </head>
 <body>
     <main>
-        <section><a href="menu.html"><b>Menu</b></a></section>
+        <!-- <section><a href="menu.html"><b>Menu</b></a></section> -->
     <div class="container">
-        <img src="C:\Users\chris\OneDrive\Desktop\FYP\app\static\images\logodesign.png" alt="" class="logo">
+        <img src="{{url_for('static', filename='images/newlogo.png')}}">
     </div>
     <div class="buttons">
-        <button class="btn">
-            <a href="{{ url_for('menu.set_order_type', type='delivery') }}">
-            <img src="{{ url_for('static', filename='images/delivery-truck.png')}}" alt="" class="icon">
-            <b>Delivery</b></a>
-        </button>
+        <form action="{{ url_for('menu.set_order_type') }}" method="POST">
+            <input type="hidden" name="order_type" value="delivery">
+            <button class="btn" type="submit">
+                <img src="{{ url_for('static', filename='images/delivery-truck.png')}}" alt="" class="icon">
+                <b>Delivery</b></a>
+            </button>
+        </form>
 
-        <button class="btn">
-            <a href="{{ url_for('menu.set_order_type', type='pickup') }}">
-            <img src="{{ url_for('static', filename='images/shopping-bag.png')}}" alt="" class="icon2">
-            <b>Pick Up</b></a>
-        </button>
+        <form action="{{ url_for('menu.set_order_type') }}" method="POST">
+        <input type="hidden" name="order_type" value="pickup">
+            <button class="btn" type="submit">
+                <img src="{{ url_for('static', filename='images/shopping-bag.png')}}" alt="" class="icon2">
+                <b>Pick Up</b></a>
+            </button>
+        </form>
     </div></main>
+    <script>
+        console.log("HOME PAGE: clearing cart...")
+        localStorage.removeItem("cart");
+    </script>
 </body>
 </html>

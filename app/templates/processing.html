@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Process</title>
+    <style>
+        /* ===== Page Base ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #EFEBDF;
+    color: #333;
+}
+
+/* ===== Container ===== */
+.processing-container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 28px 24px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Headings ===== */
+.processing-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+/* ===== Breakdown Rows ===== */
+.breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.breakdown-row strong {
+    font-weight: 600;
+}
+
+/* ===== Surcharge Warning ===== */
+.surcharge {
+    margin-top: 8px;
+    padding: 10px;
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 6px;
+    color: #856404;
+    font-size: 14px;
+}
+
+/* ===== Final Amount ===== */
+.final-amount {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ===== Action Button ===== */
+.pay-btn {
+    display: block;
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px;
+    background: #333;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.pay-btn:hover {
+    background: #000;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="processing-container">
+    <h3>Your order is currently being processed</h3>
+
+    <div class="breakdown-row">
+        <span>Food Subtotal</span>
+        <strong>${{ "%.2f" | format(order.get("subtotal", 0)) }}</strong>
+    </div>
+
+    <div class="breakdown-row">
+        <span>Base Delivery Fee</span>
+        <strong>${{ "%.2f" | format(order.delivery_breakdown.base_fee) }}</strong>
+    </div>
+
+    {% if order.delivery_breakdown.is_cbd %}
+        <div class="surcharge">
+            ⚠ Premium Area Surcharge Included:
+            +${{ "%.2f" | format(order.delivery_breakdown.cbd_surcharge) }}
+        </div>
+    {% endif %}
+
+    <div class="final-amount">
+        <span>Final Amount</span>
+        <span>${{ "%.2f" | format(order.get("final_total", 0)) }}</span>
+    </div>
+
+    <a href="{{ url_for('payment.paynow', order_id=order.id) }}"
+       class="pay-btn">
+        Proceed to Payment
+    </a>
+</div>
+
+</body>
+</html>

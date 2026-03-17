@@ -1,41 +1,44 @@
-from flask import request
-from  app.models import Order, Customization, OrderItem
-from app import db
+import uuid
+from flask import session
+from datetime import datetime
+from app.services.delivery_service import get_lalamove_price
 
-def create_order_from_data(data):
+TEMP_ORDERS= {}
 
-    new_order = Order(
-            order_type = data['Order_Type'],
-            customer_name = data['customer_name'],
-            customer_phone = data['customer_phone'],
-            postal_code=data['postal_code'],
-            zone = data['zone'],
-            delivery_address= data['delivery_address'],
-            total_amount = data[ 'total_amount'],
-            created_at = data['created_at'],
-            status = data['status']
-        )
-    db.session.add(new_order)
-    db.session.flush()
+def create_draft_order(cart, customer_name, customer_phone,order_type, postal_code,zone,address, outlet_id, outlet_name):
+    order_id = str(uuid.uuid4())
+    subtotal = calculate_total(cart)
+    order = {
+        "id" : order_id,
+        "items": cart,
+        "status":"DRAFT",
+        "subtotal":subtotal,
+        "created_at": datetime.utcnow(),
+        "customer_name": customer_name,
+        "customer_phone": customer_phone,
+        "order_type": order_type,
+        "postal_code":postal_code,
+        "zone": zone,
+        "address":address,
+        "outlet_id" : outlet_id,
+        "outlet_name": outlet_name,   
+        "delivery_fee": 0,
+        "final_total": 0,
 
-    for item in data['items']:
-        order_item = OrderItem(
-        order_id=new_order.id,
-        item_name = item['item_name'], 
-        quantity = item['quantity']
-        )
-        db.session(order_item)
-        db.session.flush()
-        
-        for custom in item['customizations']:
-            customization = Customization(
-                order_item_id=order_item.id,
-                option_name = custom['option_item'],
-                option_value = custom['option_value'],
-                option_price = custom['option_price']
-                )
-            db.session.add(customization)
+    }
 
-        db.session.commit()
+    TEMP_ORDERS[order_id] = order
+    return order
 
-        return new_order
+def get_order(order_id):
+
+    return TEMP_ORDERS.get(order_id)
+
+def calculate_total(cart):
+    total = 0.0
+    for item in cart :
+        base_price = float(item.get("base_price",0))
+        add_on_price = float(item.get("add_on_price",0))
+        quantity = int(item.get("quantity", 1))
+        total += (base_price + add_on_price)* quantity
+    return round(total, 2)

@@ -8,57 +8,128 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-def generate_bot_reply(message):
-    message = message.lower().strip()
-    words = message.split()
+BOT_SESSIONS = {}
 
+# =====================
+# MAIN BOT ENGINE
+# =====================
+def generate_bot_reply(session_id, message, customer_phone=None):
+    message = message.strip()
+    msg_lower = message.lower()
+    words = msg_lower.split()
 
-    if "order" in words:
-        return (
-            "Certainly! Here is the order form: (link appears here).\n"
-            "Please submit your PayNow payment screenshot."
-        )
+    # ------------------------------------
+    # Init session
+    # ------------------------------------
+    if session_id not in BOT_SESSIONS:
+        BOT_SESSIONS[session_id] = {
+            "customer_phone": None,
+            "reservation": {
+                "outlet": None,
+                "date": None,
+                "time": None,
+                "pax": None,
+                "special_requests": None,
+                "confirmed": False
+            }
+        }
+
+    session_data = BOT_SESSIONS[session_id]
+
+    # Upgrade phone when it becomes available
+    if customer_phone:
+        session_data["customer_phone"] = customer_phone
+
+    res = session_data["reservation"]
+
+    # =====================
+    # QUICK INTENTS
+    # =====================
+    if any(w in words for w in ["hi", "hello", "hey"]):
+        return "Hello! 😊 How may I help you today?"
 
     if "menu" in words:
-        return "Here is the menu."
+        return "Here is our menu: http://127.0.0.1:5000/menu"
 
-    if "hi" in words or "hello" in words:
-        return "Hello! How may I help you?"
+    if any(w in words for w in ["order", "buy", "makan", "purchase"]):
+        return (
+            "Certainly! 🍗\n"
+            "Here is the order form:\n"
+            "http://127.0.0.1:5000\n\n"
+            "You can submit your PayNow screenshot after ordering."
+        )
 
-    if "submitted" in words:
-        return "Thank you! We have received your order."
+    # =====================
+    # RESERVATION FLOW
+    # =====================
+    if any(w in words for w in ["reserve", "reservation", "book", "booking", "table", "dine"]):
+        reset_reservation(res)
+        return "Sure 😊 Which outlet would you like to reserve at?"
 
+    if res["outlet"] is None:
+        res["outlet"] = message.title()
+        return "Got it 👍 What date would you like to come? (e.g. 12 Feb)"
 
-    prompt = f"""
-    You are an F&B restaurant chatbot. Your job is to correctly understand the customer's intent,
-    even if they use slang, wrong spelling, different tenses, or indirect language.
+    if res["date"] is None:
+        res["date"] = message
+        return "Nice! What time should I reserve for you? (e.g. 7:30 PM)"
 
-    Customer message: "{message}"
+    if res["time"] is None:
+        res["time"] = message
+        return "How many pax will be dining?"
 
-    Determine the correct INTENT:
-    1. ORDERING — user wants to place an order, buy food, makan, purchase something
-    2. MENU — user wants to see the menu
-    3. GREETING — user is greeting
-    4. CONFIRMATION — user says they submitted payment or confirmed something
-    5. UNKNOWN — unclear intent
+    if res["pax"] is None:
+        res["pax"] = message
+        return (
+            "Any special requirements?\n"
+            "Examples: baby chair, indoor/outdoor seating.\n"
+            "Reply *none* if not applicable."
+        )
 
-    Reply ONLY with:
-    - If ORDERING → "Certainly! Here is the order form: (link). Please submit your payment screenshot."
-    - If MENU → "Here is the menu."
-    - If GREETING → "Hello! How may I help you?"
-    - If CONFIRMATION → "Thank you! We have received your order."
-    - If UNKNOWN → "I'm sorry, could you clarify what you mean?"
+    if res["special_requests"] is None:
+        res["special_requests"] = message
+        return generate_reservation_summary(res)
 
-    Respond ONLY with the final answer. No explanations.
-    """
+    if "confirm" in words:
+        res["confirmed"] = True
+        route_reservation(res)
+        return "✅ Your reservation is confirmed! We’ve informed the outlet."
 
-    try:
-        response = model.generate_content(prompt)
-        return response.text   
+    # =====================
+    # FALLBACK
+    # =====================
+    return "I’m sorry 😅 could you rephrase that?"
 
-    except Exception as e:
-        print("LLM Error:", e)
+# =====================
+# HELPERS
+# =====================
+def reset_reservation(res):
+    res.update({
+        "outlet": None,
+        "date": None,
+        "time": None,
+        "pax": None,
+        "special_requests": None,
+        "confirmed": False
+    })
 
-    
-    
-    return "I'm sorry, I didn't quite catch that. Can you repeat?"
+def generate_reservation_summary(res):
+    return (
+        "📋 *Reservation Summary*\n"
+        f"Outlet: {res['outlet']}\n"
+        f"Date: {res['date']}\n"
+        f"Time: {res['time']}\n"
+        f"Pax: {res['pax']}\n"
+        f"Special requests: {res['special_requests']}\n\n"
+        "Reply *CONFIRM* to finalize your reservation."
+    )
+
+def route_reservation(res):
+    print("📢 NEW RESERVATION")
+    print(res)
+
+# =====================
+# MESSAGE SENDER
+# =====================
+def send_bot_message(to, message):
+    print(f"[BOT → {to}] {message}")

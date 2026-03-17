@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #EFEBDF; /* same beige tone */
+    color: #333;
+}
+
+/* ===== Container ===== */
+.result-container {
+    max-width: 420px;
+    margin: 60px auto;
+    background: #ffffff;
+    padding: 28px 24px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+/* ===== Headings ===== */
+.result-container h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 22px;
+}
+
+.result-container h3 {
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ===== Status Messages ===== */
+.status-success {
+    color: #1b7f3b;
+    background: #e6f7ec;
+    border: 1px solid #b7e4c7;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.status-error {
+    color: #b02a37;
+    background: #fdecec;
+    border: 1px solid #f5c2c7;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+/* ===== Image Preview ===== */
+.uploaded-image {
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+/* ===== Button / Link ===== */
+.back-btn {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 10px 16px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.back-btn:hover {
+    background: #000;
+}
+</style>
+<body>
+    <div class="result-container">
+    <h2>Payment Status</h2>
+
+    {% if success %}
+        <div class="status-success">
+            ✅ {{ success }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="status-error">
+            ❌ {{ error }}
+        </div>
+    {% endif %}
+
+    {% if image_url %}
+        <h3>Uploaded Screenshot</h3>
+        <img src="{{ image_url }}" class="uploaded-image">
+    {% endif %}
+
+    <a href="{{ url_for('order_bp.order_summary', order_id=order.id) }}"
+       class="back-btn">
+        Back to Order Summary
+    </a>
+</div>
+
+</body>
+</html>

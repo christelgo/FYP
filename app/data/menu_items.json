@@ -2,8 +2,8 @@
     "defaults":{
         "delivery_zones":{
             "West":["Boon Lay", "Bukit Panjang","Bukit Timah", "Choa Chu Kang","Holland","Jurong","Pasir Panjang", "Sembawang", "Tuas","Woodlands","Yishun"],
-            "East":["Alexandra", "Ang Mo Kio", "Bishan","Bugis", "Central Business District(CBD)","Hougang", "Newton","Novena","Orchard", "Potong Pasir", "Queenstown", "Redhill", "Sentosa", "Serangoon", "Suntec", "Tanglin", "Tiong Bahru", "Toa Payoh", "Telok Blangah", "Yio Chu Kang"],
-            "Central":["Aljunied","Bedok","Changi","Eunos","Lavender","Kallang","Pasir Ris","Paya Lebar", "Punggol","Sengkang", "Tampines"]
+            "Central":["Alexandra", "Ang Mo Kio", "Bishan","Bugis", "Central Business District(CBD)","Hougang", "Newton","Novena","Orchard", "Potong Pasir", "Queenstown", "Redhill", "Sentosa", "Serangoon", "Suntec", "Tanglin", "Tiong Bahru", "Toa Payoh", "Telok Blangah", "Yio Chu Kang"],
+            "East":["Aljunied","Bedok","Changi","Eunos","Lavender","Kallang","Pasir Ris","Paya Lebar", "Punggol","Sengkang", "Tampines"]
         },
         "pickup_zones":{
             "West":["Woodlands"],"East": ["East Coast"],"Central":["River Valley"]
@@ -217,6 +217,7 @@
                         {"label": "Wing"},
                         {"label": "Drum", "price": 1.50}]
                     },
+
                     "drink_add_on": {
                         "options":[
                             {"label":"Ice Lemon Tea", "price": 1.50}
